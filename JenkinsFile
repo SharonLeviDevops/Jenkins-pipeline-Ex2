@@ -1,15 +1,15 @@
 pipeline {
     agent any
-
-    stage('Build Yolo5 app') {
-   steps {
-       sh '''
-            aws ecr get-login-password --region us-east-1 | docker login --username AWS --password-stdin 700935310038.dkr.ecr.us-east-1.amazonaws.com
-            docker build -t sharon-jenkins-yolo .
-            docker tag sharon-jenkins-yolo:0.1 700935310038.dkr.ecr.us-east-1.amazonaws.com/sharon-jenkins-yolo:0.1
-            docker push 700935310038.dkr.ecr.us-east-1.amazonaws.com/sharon-jenkins-yolo:0.1
-       '''
-      }
+    stages {
+      stage('Build Yolo5 app') {
+        steps {
+           sh '''
+                aws ecr get-login-password --region us-east-1 | docker login --username AWS --password-stdin 700935310038.dkr.ecr.us-east-1.amazonaws.com
+                docker build -t sharon-jenkins-yolo .
+                docker tag sharon-jenkins-yolo:0.1 700935310038.dkr.ecr.us-east-1.amazonaws.com/sharon-jenkins-yolo:0.1
+                docker push 700935310038.dkr.ecr.us-east-1.amazonaws.com/sharon-jenkins-yolo:0.1
+           '''
+       }
      }
      stage('Deploy') {
           environment {
