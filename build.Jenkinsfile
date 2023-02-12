@@ -13,8 +13,10 @@ pipeline {
      }
      post {
         always {
+            sh '''
             docker image prune -a -f
             docker images
+            '''
         }
     }
      stage('Env') {
