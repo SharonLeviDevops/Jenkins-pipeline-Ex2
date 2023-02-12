@@ -9,10 +9,10 @@ pipeline {
         stage('Build Yolo5 app') {
             steps {
                 sh '''
-                    aws ecr get-login-password --region us-east-1 | docker login --username AWS --password-stdin 700935310038.dkr.ecr.us-east-1.amazonaws.com
-                    docker build -t $IMAGE_NAME:0.1 .
-                    docker tag $IMAGE_NAME:0.1 $ECR_REGION_URL/$IMAGE_NAME:0.1
-                    docker push $ECR_REGION_URL/$IMAGE_NAME:0.1
+                    aws ecr get-login-password --region us-east-1 | docker login --username AWS --password-stdin $ECR_REGION_URL
+                    docker build -t $IMAGE_NAME:$BUILD_NUMBER .
+                    docker tag $IMAGE_NAME:$BUILD_NUMBER $ECR_REGION_URL/$IMAGE_NAME:$BUILD_NUMBER
+                    docker push $ECR_REGION_URL/$IMAGE_NAME:$BUILD_NUMBER
                 '''
             }
         }
@@ -27,7 +27,7 @@ pipeline {
         stage('Trigger Deploy') {
             steps {
                 build job: 'AppDeploy', wait: false, parameters: [
-                    string(name: 'YOLO5_IMAGE_URL', value: "700935310038.dkr.ecr.us-east-1.amazonaws.com/sharon-jenkins-yolo:0.1")
+                    string(name: 'YOLO5_IMAGE_URL', value: "700935310038.dkr.ecr.us-east-1.amazonaws.com/sharon-jenkins-yolo:$BUILD_NUMBER")
                 ]
            }
        }
