@@ -24,11 +24,6 @@ pipeline {
             AWS_REGION = 'us-east-1'
             ECR_REGION_URL = '700935310038.dkr.ecr.us-east-1.amazonaws.com'
        }
-       steps {
-          sh '''
-            # Your deploy commands here
-            '''
-      }
     }
   }
 }
