@@ -11,7 +11,13 @@ pipeline {
            '''
        }
      }
-     stage('Deploy') {
+     post {
+        always {
+            docker image prune -a -f
+            docker images
+        }
+    }
+     stage('Env') {
           environment {
             AWS_REGION = 'us-east-1'
             ECR_REGION_URL = '700935310038.dkr.ecr.us-east-1.amazonaws.com'
