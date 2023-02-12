@@ -11,7 +11,7 @@ pipeline {
            '''
        }
      }
-     post {
+    post {
         always {
             sh '''
             docker image prune -a -f
