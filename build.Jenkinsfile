@@ -20,7 +20,7 @@ pipeline {
                     docker push $ECR_REGION_URL/$IMAGE_NAME:$BUILD_NUMBER
                 '''
             }
-           }
+        }
         stage('Scan') {
             steps {
                 withCredentials([string(credentialsId: 'synk', variable: 'SNYK_TOKEN')]) {
@@ -33,10 +33,10 @@ pipeline {
             }
         }
         post {
-               always {
-                    sh 'docker image prune -a -f'
-                }
-             }
+            always {
+                sh 'docker image prune -a -f'
+            }
+        }
         stage('Trigger Deploy') {
             steps {
                 build job: 'AppDeploy', wait: false, parameters: [
