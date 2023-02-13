@@ -16,19 +16,25 @@ pipeline {
                 sh '''
                     aws ecr get-login-password --region us-east-1 | docker login --username AWS --password-stdin $ECR_REGION_URL
                     docker build -t $IMAGE_NAME:$BUILD_NUMBER .
-                    docker tag $IMAGE_NAME:$BUILD_NUMBER $ECR_REGION_URL/$IMAGE_NAME:$BUILD_NUMBER
-                    docker push $ECR_REGION_URL/$IMAGE_NAME:$BUILD_NUMBER
                 '''
             }
         }
-        stage('Scan') {
+        stage('Scan image') {
             steps {
                 withCredentials([string(credentialsId: 'synk', variable: 'SNYK_TOKEN')]) {
                     sh '''
                         snyk-new auth $SNYK_TOKEN
-                        snyk-new container test $IMAGE_NAME:$BUILD_NUMBER --severity-threshold=high
+                        snyk-new container test $IMAGE_NAME:$BUILD_NUMBER --severity-threshold=high --file=Docker
                        '''
                 }
+            }
+        }
+        stage('Tag and Push') {
+            steps {
+                sh '''
+                    docker tag $IMAGE_NAME:$BUILD_NUMBER $ECR_REGION_URL/$IMAGE_NAME:$BUILD_NUMBER
+                    docker push $ECR_REGION_URL/$IMAGE_NAME:$BUILD_NUMBER
+                '''
             }
         }
         stage('Trigger Deploy') {
