@@ -32,16 +32,16 @@ pipeline {
                 }
             }
         }
-        post {
-            always {
-                sh 'docker image prune -a -f'
-            }
-        }
         stage('Trigger Deploy') {
             steps {
                 build job: 'AppDeploy', wait: false, parameters: [
                     string(name: 'YOLO5_IMAGE_URL', value: "$ECR_REGION_URL/$IMAGE_NAME:$BUILD_NUMBER")
                 ]
+            }
+        }
+    post {
+         always {
+                sh 'docker image prune -a -f'
             }
         }
     }
