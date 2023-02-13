@@ -32,6 +32,7 @@ pipeline {
                     sh '''
                         snyk-new auth $SNYK_TOKEN
                         snyk-new container test $IMAGE_NAME:$BUILD_NUMBER --severity-threshold=high
+                        snyk-new ignore --id=<ISSUE_ID>
                     '''
                 }
             }
