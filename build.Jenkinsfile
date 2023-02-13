@@ -2,7 +2,7 @@ pipeline {
     agent any
     options {
         timeout(time: 45, unit: 'MINUTES')
-        retry(3)
+        retry(1)
     }
     environment {
         AWS_REGION = 'us-east-1'
