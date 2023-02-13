@@ -20,6 +20,11 @@ pipeline {
                     docker push $ECR_REGION_URL/$IMAGE_NAME:$BUILD_NUMBER
                 '''
             }
+        post {
+               always {
+                    sh 'docker image prune -a -f'
+                }
+             }
         }
         stage('Scan') {
             steps {
@@ -28,11 +33,6 @@ pipeline {
                         snyk-new auth $SNYK_TOKEN
                         snyk-new container test $IMAGE_NAME:$BUILD_NUMBER --severity-threshold=high
                     '''
-                }
-            post {
-                   always {
-                        sh 'docker image prune -a -f'
-                   }
                 }
             }
         }
