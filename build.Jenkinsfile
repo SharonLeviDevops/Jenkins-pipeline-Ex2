@@ -27,7 +27,7 @@ pipeline {
         stage('Trigger Deploy') {
             steps {
                 build job: 'AppDeploy', wait: false, parameters: [
-                    string(name: 'YOLO5_IMAGE_URL', value: "700935310038.dkr.ecr.us-east-1.amazonaws.com/sharon-jenkins-yolo:$BUILD_NUMBER")
+                    string(name: 'YOLO5_IMAGE_URL', value: "$ECR_REGION_URL/$IMAGE_NAME:$BUILD_NUMBER")
                 ]
            }
        }
