@@ -3,6 +3,7 @@ pipeline {
     options {
         timeout(time: 45, unit: 'MINUTES')
         retry(1)
+        disableConcurrentBuilds()
     }
     environment {
         AWS_REGION = 'us-east-1'
