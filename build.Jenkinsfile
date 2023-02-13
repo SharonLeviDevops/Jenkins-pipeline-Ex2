@@ -44,5 +44,5 @@ pipeline {
                 build job: 'AppDeploy', wait: false, parameters: [
                     string(name: 'YOLO5_IMAGE_URL', value: "$ECR_REGION_URL/$IMAGE_NAME:$BUILD_NUMBER")
                 ]
-           }
-       }
+            }
+        }
