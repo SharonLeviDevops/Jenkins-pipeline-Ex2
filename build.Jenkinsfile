@@ -29,14 +29,11 @@ pipeline {
                         snyk-new container test $IMAGE_NAME:$BUILD_NUMBER --severity-threshold=high
                     '''
                 }
-            }
-        }
-        stage('Post') {
-            steps {
-                sh '''
-                    docker image prune -a -f
-                    docker images
-                '''
+            post {
+                   always {
+                        sh 'docker image prune -a -f'
+                   }
+                }
             }
         }
         stage('Trigger Deploy') {
