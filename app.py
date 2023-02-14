@@ -28,6 +28,7 @@ def upload_file():
     # If the user does not select a file, the browser submits an
     # empty file without a filename.
     #new feature test
+    #add another feature test 2
     if file.filename == '':
         flash('No selected file')
         return redirect(request.url)
