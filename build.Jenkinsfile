@@ -24,8 +24,8 @@ pipeline {
             steps {
                 withCredentials([string(credentialsId: 'synk', variable: 'SNYK_TOKEN')]) {
                     sh '''
-                        snyk-new auth $SNYK_TOKEN
-                        snyk-new container test $IMAGE_NAME:$BUILD_NUMBER --severity-threshold=high --file=Docker
+                        snyk auth $SNYK_TOKEN
+                        snyk container test $IMAGE_NAME:$BUILD_NUMBER --severity-threshold=high --file=Docker
                        '''
                 }
             }
