@@ -1,5 +1,4 @@
 from pathlib import Path
-
 from flask import Flask, send_file, request, render_template, flash, request, redirect, url_for
 from detect import run, ROOT
 import os
