@@ -12,7 +12,7 @@ pipeline {
         SNYK_TOKEN = 'ebcc3f22-7670-4903-9511-d36c1fcdffb3'
     }
     stages {
-        stage('Build Yolo5 new') {
+        stage('Build Yolo5') {
             steps {
                 sh '''
                     aws ecr get-login-password --region us-east-1 | docker login --username AWS --password-stdin $ECR_REGION_URL
