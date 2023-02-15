@@ -4,7 +4,7 @@ pipeline {
     stages {
         stage('Unittest') {
             steps {
-                echo "testing"
+                sh 'python3 -m pytest --junitxml results.xml tests'
             }
         }
         stage('Lint') {
@@ -17,5 +17,10 @@ pipeline {
                 echo "testing"
             }
         }
+    post {
+    always {
+        junit allowEmptyResults: true, testResults: 'results.xml'
+       }
+      }
     }
 }
