@@ -9,7 +9,7 @@ pipeline {
         AWS_REGION = 'us-east-1'
         ECR_REGION_URL = '700935310038.dkr.ecr.us-east-1.amazonaws.com'
         IMAGE_NAME = 'sharon-jenkins-yolo'
-        SNYK_TOKEN = 'ebcc3f22-7670-4903-9511-d36c1fcdffb3'
+        SNYK_TOKEN = 'ee84f19b-9165-4d7d-bda8-4c04eeb1cba3'
     }
     stages {
         stage('Build Yolo5 app') {
@@ -22,7 +22,7 @@ pipeline {
         }
         stage('Scan image') {
             steps {
-                withCredentials([string(credentialsId: 'synk', variable: 'SNYK_TOKEN')]) {
+                withCredentials([string(credentialsId: 'snyk_token', variable: 'SNYK_TOKEN')]) {
                     sh '''
                         snyk-new auth $SNYK_TOKEN
                         snyk-new container test $IMAGE_NAME:$BUILD_NUMBER --severity-threshold=high --file=Docker
