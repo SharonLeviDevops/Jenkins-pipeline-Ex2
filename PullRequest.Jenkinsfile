@@ -1,26 +1,51 @@
 pipeline {
-    agent any
+agent any
 
-    stages {
-        stage('Unittest') {
-            steps {
-                sh 'python3 -m pytest --junitxml results.xml tests'
-            }
+stages {
+    stage('Lint') {
+        steps {
+            sh '''
+                    python3 -m pylint -f parseable --reports=no *.py > pylint.log
+               '''
         }
-        stage('Lint') {
-            steps {
-                echo "linting"
-            }
-        }
-        stage('Functional test') {
-            steps {
-                echo "testing"
-            }
-        }
+    }
     post {
+      always {
+        sh 'cat pylint.log'
+        recordIssues (
+         enabledForFailure: true,
+         aggregatingResults: true,
+         tools: [pyLint(name: 'Pylint', pattern: '**/pylint.log')]
+        )
+       }
+    }
+    stage('Tests') {
+        when {
+            branch 'main'
+        }
+        failFast true
+        parallel {
+            stage('Unit Tests') {
+                steps {
+                    sh 'python3 -m pytest --junitxml results.xml tests'
+                }
+            }
+            stage('Functional Tests') {
+                steps {
+                    echo 'Functional tests running...'
+                }
+            }
+        }
+    }
+}
+post {
     always {
         junit allowEmptyResults: true, testResults: 'results.xml'
-       }
-      }
     }
+    failure {
+        script {
+          error('Build failed due to test failures')
+    }
+   }
+  }
 }

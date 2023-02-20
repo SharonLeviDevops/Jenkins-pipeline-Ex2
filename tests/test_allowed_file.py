@@ -2,7 +2,6 @@ import unittest2 as unittest
 from app import allowed_file, ALLOWED_EXTENSIONS
 
 
-
 class TestBacklogPerInstanceMetric(unittest.TestCase):
     def test_valid_filename(self):
         for ext in ALLOWED_EXTENSIONS:

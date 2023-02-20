@@ -22,7 +22,7 @@ pipeline {
         }
         stage('Scan image') {
             steps {
-                withCredentials([string(credentialsId: 'Snyk', variable: 'SNYK_TOKEN')]) {
+                withCredentials([string(credentialsId: 'snyk_token', variable: 'SNYK_TOKEN')]) {
                     sh '''
                         snyk auth $SNYK_TOKEN
                         snyk container test $IMAGE_NAME:$BUILD_NUMBER --severity-threshold=high

@@ -1,8 +1,10 @@
 # YOLOv5 requirements
 # Usage: pip install -r requirements.txt
 
-flask~=2.2.2
+flask
 
-unittest2~=1.1.0
-pytest~=7.2.1
-Werkzeug~=2.2.2
+# testing
+
+pylint
+unittest2
+pytest

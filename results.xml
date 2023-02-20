@@ -1,15 +1,10 @@
-<?xml version="1.0" encoding="utf-8"?><testsuites><testsuite name="pytest" errors="1" failures="0" skipped="0" tests="1" time="0.304" timestamp="2023-02-15T10:05:24.194077" hostname="Sakaria-LTD"><testcase classname="" name="tests.test_allowed_file" time="0.000"><error message="collection failure">tests\test_allowed_file.py:1: in &lt;module&gt;
-    import unittest2 as unittest
-..\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.10_qbz5n2kfra8p0\LocalCache\local-packages\Python310\site-packages\unittest2\__init__.py:40: in &lt;module&gt;
-    from unittest2.collector import collector
-..\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.10_qbz5n2kfra8p0\LocalCache\local-packages\Python310\site-packages\unittest2\collector.py:3: in &lt;module&gt;
-    from unittest2.loader import defaultTestLoader
-..\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.10_qbz5n2kfra8p0\LocalCache\local-packages\Python310\site-packages\unittest2\loader.py:13: in &lt;module&gt;
-    from unittest2 import case, suite, util
-..\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.10_qbz5n2kfra8p0\LocalCache\local-packages\Python310\site-packages\unittest2\case.py:18: in &lt;module&gt;
-    from unittest2 import result
-..\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.10_qbz5n2kfra8p0\LocalCache\local-packages\Python310\site-packages\unittest2\result.py:10: in &lt;module&gt;
-    from unittest2.compatibility import wraps
-..\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.10_qbz5n2kfra8p0\LocalCache\local-packages\Python310\site-packages\unittest2\compatibility.py:143: in &lt;module&gt;
-    class ChainMap(collections.MutableMapping):
-E   AttributeError: module 'collections' has no attribute 'MutableMapping'</error></testcase></testsuite></testsuites>
+<?xml version="1.0" encoding="utf-8"?><testsuites><testsuite name="pytest" errors="1" failures="0" skipped="0" tests="1" time="0.368" timestamp="2023-02-15T14:15:47.760190" hostname="Sakaria-LTD"><testcase classname="" name="tests.test_allowed_file" time="0.000"><error message="collection failure">ImportError while importing test module 'C:\Users\Reshef Office\GitHubtoJenkins\tests\test_allowed_file.py'.
+Hint: make sure your test modules/packages have valid Python names.
+Traceback:
+..\AppData\Local\Programs\Python\Python39-32\lib\importlib\__init__.py:127: in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+tests\test_allowed_file.py:2: in &lt;module&gt;
+    from app import allowed_file, ALLOWED_EXTENSIONS
+app.py:3: in &lt;module&gt;
+    from detect import run, ROOT
+E   ImportError: cannot import name 'run' from 'detect' (C:\Users\Reshef Office\GitHubtoJenkins\env\lib\site-packages\detect\__init__.py)</error></testcase></testsuite></testsuites>
