@@ -27,7 +27,10 @@ stages {
         parallel {
             stage('Unit Tests') {
                 steps {
-                    sh 'python3 -m pytest --junitxml results.xml tests'
+                    sh '''
+                    pip install -r requirements.txt
+                    python3 -m pytest --junitxml results.xml tests
+                    '''
                 }
             }
             stage('Functional Tests') {
