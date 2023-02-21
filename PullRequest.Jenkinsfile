@@ -4,7 +4,7 @@ pipeline {
     stages {
         stage('Lint') {
             steps {
-                sh 'python3 -m pylint -f parseable --reports=no *.py'
+                sh 'python3 -m pylint *.py'
             }
         }
         stage('Tests') {
