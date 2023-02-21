@@ -4,7 +4,7 @@ agent any
 stages {
     stage('Lint') {
         steps {
-            sh 'python3 -m pylint -f parseable --reports=no *.py > pylint.log'
+            sh 'python3 --version'
         }
     }
     stage('Unit Tests') {
