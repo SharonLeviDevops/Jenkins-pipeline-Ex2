@@ -18,7 +18,7 @@ stages {
             }
             stage('Functional Tests') {
                 steps {
-                    echo 'Functional tests running...'
+                    echo 'Functional tests running.....'
                 }
             }
         }
