@@ -25,6 +25,7 @@ pipeline {
                 withCredentials([string(credentialsId: 'snyk_token', variable: 'SNYK_TOKEN')]) {
                     sh '''
                         snyk auth $SNYK_TOKEN
+                        snyk config set disableSuggestions=true
                         snyk container test $IMAGE_NAME:$BUILD_NUMBER --severity-threshold=high --file=Dockerfile
                        '''
                 }
