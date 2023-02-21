@@ -33,7 +33,7 @@ stages {
                     '''
                 }
             }
-            stage('Functional Tests') {
+            stage('Functional Testss') {
                 steps {
                     echo 'Functional tests running...'
                 }
