@@ -24,7 +24,7 @@ pipeline {
             steps {
                 withCredentials([string(credentialsId: 'snyk_token', variable: 'SNYK_TOKEN')]) {
                     sh '''
-                        snyk-hh auth $SNYK_TOKEN
+                        snyk auth $SNYK_TOKEN
                         snyk container test $IMAGE_NAME:$BUILD_NUMBER --severity-threshold=high
                        '''
                 }
