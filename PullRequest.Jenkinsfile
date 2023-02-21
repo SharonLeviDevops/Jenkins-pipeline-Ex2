@@ -29,7 +29,7 @@ stages {
                 steps {
                     sh '''
                     pip install -r requirements.txt
-                    python3 -m pytest --junitxml results.xml tests
+                    python -m pytest --junitxml results.xml tests
                     '''
                 }
             }
