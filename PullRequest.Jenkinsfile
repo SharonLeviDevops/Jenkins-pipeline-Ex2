@@ -19,7 +19,6 @@ pipeline {
                             pip install -r requirements.txt
                             python -m pytest --junitxml results.xml tests
                             python --version
-                            python3 --version
                         '''
                     }
                 }
