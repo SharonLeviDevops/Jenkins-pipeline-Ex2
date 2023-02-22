@@ -1,3 +1,4 @@
+
 pipeline {
     agent any
     stages {
@@ -40,4 +41,3 @@ pipeline {
             junit allowEmptyResults: true, testResults: 'results.xml'
         }
     }
-}
