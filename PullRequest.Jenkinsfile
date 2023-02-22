@@ -4,7 +4,7 @@ pipeline {
     stages {
         stage('Lint') {
             steps {
-                sh 'python3 --version'
+                 sh 'python3 -m pylint -f parseable --reports=no *.py > pylint.log'
             }
             post {
                 always {
@@ -23,7 +23,7 @@ pipeline {
                     steps {
                         sh '''
                             pip install -r requirements.txt
-                            python -m pytest --junitxml results.xml tests
+                            python3 -m pytest --junitxml results.xml tests
                         '''
                     }
                 }
