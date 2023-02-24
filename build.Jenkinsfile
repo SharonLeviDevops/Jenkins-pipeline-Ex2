@@ -1,10 +1,11 @@
 pipeline {
     agent {
-        docker {
-            sh 'aws ecr get-login-password --region us-east-1 | docker login --username AWS --password-stdin 700935310038.dkr.ecr.us-east-1.amazonaws.com'
-            image '700935310038.dkr.ecr.us-east-1.amazonaws.com/sharon-jenkins-agent:latest'
-            args  '--user root -v /var/run/docker.sock:/var/run/docker.sock'
-        }
+            docker {
+              image '700935310038.dkr.ecr.us-east-1.amazonaws.com/sharon-jenkins-agent:latest'
+              args  '--user root -v /var/run/docker.sock:/var/run/docker.sock --password-stdin'
+              // Pass the authentication token to Docker as stdin
+              stdinCredentialsId 'ecr-auth-token'
+            }
     }
     options {
         timeout(time: 45, unit: 'MINUTES')
