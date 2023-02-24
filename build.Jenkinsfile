@@ -24,7 +24,7 @@ pipeline {
                 '''
             }
         }
-        stage('Scan image') {
+        stage('Scan images') {
             steps {
                 withCredentials([string(credentialsId: 'snyk_token', variable: 'SNYK_TOKEN')]) {
                     sh '''
