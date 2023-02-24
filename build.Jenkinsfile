@@ -14,7 +14,6 @@ pipeline {
         AWS_REGION = 'us-east-1'
         ECR_REGION_URL = '700935310038.dkr.ecr.us-east-1.amazonaws.com'
         IMAGE_NAME = 'sharon-jenkins-yolo'
-        SNYK_TOKEN = '4cba8c08-b2b5-4a5a-8c30-17d598d8e442'
     }
     stages {
         stage('Build Yolo5 app') {
