@@ -4,6 +4,7 @@ pipeline {
             image '700935310038.dkr.ecr.us-east-1.amazonaws.com/sharon-jenkins-agent:latest'
             args  '--user root -v /var/run/docker.sock:/var/run/docker.sock'
         }
+    }
     options {
         timeout(time: 45, unit: 'MINUTES')
         retry(1)
@@ -56,5 +57,4 @@ pipeline {
             sh 'docker image prune -f'
         }
     }
-}
 }
