@@ -1,11 +1,11 @@
 pipeline {
     agent {
-            docker {
-              image '700935310038.dkr.ecr.us-east-1.amazonaws.com/sharon-jenkins-agent:latest'
-              args  '--user root -v /var/run/docker.sock:/var/run/docker.sock --password-stdin'
-              // Pass the authentication token to Docker as stdin
-              stdinCredentialsId 'ecr-auth-token'
-            }
+        docker {
+            image '700935310038.dkr.ecr.us-east-1.amazonaws.com/sharon-jenkins-agent:latest'
+            registryUrl '700935310038.dkr.ecr.us-east-1.amazonaws.com'
+            registryCredentialsId 'ecr-auth-token'
+            args  '--user root -v /var/run/docker.sock:/var/run/docker.sock --password-stdin'
+        }
     }
     options {
         timeout(time: 45, unit: 'MINUTES')
@@ -26,7 +26,7 @@ pipeline {
                 '''
             }
         }
-        stage('Scan images') {
+        stage('Scan image') {
             steps {
                 withCredentials([string(credentialsId: 'snyk_token', variable: 'SNYK_TOKEN')]) {
                     sh '''
